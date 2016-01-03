@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities">
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="TestDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleGroups">
+      <EntityTypeMapping TypeName="TestDBModel.RoleGroup">
+        <MappingFragment StoreEntitySet="RoleGroup">
+          <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+          <ScalarProperty Name="RoleGroupName" ColumnName="RoleGroupName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

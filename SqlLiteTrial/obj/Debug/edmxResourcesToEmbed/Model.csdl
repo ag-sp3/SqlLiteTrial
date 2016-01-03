@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleGroupID" Type="Int32" />
+    <NavigationProperty Name="RoleGroup" Relationship="Self.FK_Role_0_0" FromRole="Role" ToRole="RoleGroup" />
+  </EntityType>
+  <EntityType Name="RoleGroup">
+    <Key>
+      <PropertyRef Name="RoleGroupID" />
+    </Key>
+    <Property Name="RoleGroupID" Type="Int32" Nullable="false" />
+    <Property Name="RoleGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Role_0_0" FromRole="RoleGroup" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_Role_0_0">
+    <End Role="RoleGroup" Type="Self.RoleGroup" Multiplicity="0..1" />
+    <End Role="Role" Type="Self.Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleGroup">
+        <PropertyRef Name="RoleGroupID" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="RoleGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RoleGroups" EntityType="Self.RoleGroup" />
+    <AssociationSet Name="FK_Role_0_0" Association="Self.FK_Role_0_0">
+      <End Role="RoleGroup" EntitySet="RoleGroups" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -12,3 +12,4 @@ C:\GitHub\SqlLiteTrial\SqlLiteTrial\bin\Debug\EntityFramework.SqlServer.xml
 C:\GitHub\SqlLiteTrial\SqlLiteTrial\bin\Debug\System.Data.SQLite.xml
 C:\GitHub\SqlLiteTrial\SqlLiteTrial\obj\Debug\SqlLiteTrial.exe
 C:\GitHub\SqlLiteTrial\SqlLiteTrial\obj\Debug\SqlLiteTrial.pdb
+C:\GitHub\SqlLiteTrial\SqlLiteTrial\obj\Debug\SqlLiteTrial.csprojResolveAssemblyReference.cache

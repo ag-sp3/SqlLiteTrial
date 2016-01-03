@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestDBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\GitHub\SqlLiteTrial\SqlLiteTrial\TestDB.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleGroupID" Type="int" />
+        </EntityType>
+        <EntityType Name="RoleGroup">
+          <Key>
+            <PropertyRef Name="RoleGroupID" />
+          </Key>
+          <Property Name="RoleGroupID" Type="int" Nullable="false" />
+          <Property Name="RoleGroupName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Role_0_0">
+          <End Role="RoleGroup" Type="Self.RoleGroup" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleGroup">
+              <PropertyRef Name="RoleGroupID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="RoleGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestDBModelStoreContainer">
+          <EntitySet Name="Role" EntityType="Self.Role" store:Type="Tables" />
+          <EntitySet Name="RoleGroup" EntityType="Self.RoleGroup" store:Type="Tables" />
+          <AssociationSet Name="FK_Role_0_0" Association="Self.FK_Role_0_0">
+            <End Role="RoleGroup" EntitySet="RoleGroup" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleGroupID" Type="Int32" />
+          <NavigationProperty Name="RoleGroup" Relationship="Self.FK_Role_0_0" FromRole="Role" ToRole="RoleGroup" />
+        </EntityType>
+        <EntityType Name="RoleGroup">
+          <Key>
+            <PropertyRef Name="RoleGroupID" />
+          </Key>
+          <Property Name="RoleGroupID" Type="Int32" Nullable="false" />
+          <Property Name="RoleGroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Role_0_0" FromRole="RoleGroup" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Role_0_0">
+          <End Role="RoleGroup" Type="Self.RoleGroup" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleGroup">
+              <PropertyRef Name="RoleGroupID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="RoleGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="RoleGroups" EntityType="Self.RoleGroup" />
+          <AssociationSet Name="FK_Role_0_0" Association="Self.FK_Role_0_0">
+            <End Role="RoleGroup" EntitySet="RoleGroups" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities">
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TestDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleGroups">
+            <EntityTypeMapping TypeName="TestDBModel.RoleGroup">
+              <MappingFragment StoreEntitySet="RoleGroup">
+                <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+                <ScalarProperty Name="RoleGroupName" ColumnName="RoleGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
