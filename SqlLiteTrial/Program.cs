@@ -7,18 +7,29 @@ namespace SqlLiteTrial
     {
         static void Main(string[] args)
         {
-            using (var context = new TestDBEntities())
+            using (var context = new TMCMeetingsEntities())
             {
-                var result = from r in context.Roles
-                             join rg in context.RoleGroups
-                             on r.RoleGroupID equals rg.RoleGroupID
-                             select new { RoleName = r.RoleName, RoleGroup = rg.RoleGroupName };
+                var roletaker =(from rtk in context.MeetingRoleTakers
+                                join u in context.Users
+                                on rtk.UserID equals u.UserID
+                                join r in context.MeetingRoles
+                                on rtk.RoleID equals r.RoleID
+                                join m in context.Meetings
+                                on rtk.MeetingID equals m.MeetingID
+                                where r.RoleID == 4 //Table Topics Evaluator
+                                select new
+                                {
+                                    Meeting_Nth = m.Nth,
+                                    Role = r.RoleName,
+                                    RoleTaker = u.DisplayName
+                                }).FirstOrDefault();
 
-                result.ToList().ForEach(i => Console.WriteLine("{0}: {1}", i.RoleName, i.RoleGroup));
-                
+
+                Console.WriteLine("The " + roletaker.Role + " of " + 
+                    roletaker.Meeting_Nth + " Meeting is " + roletaker.RoleTaker + ".");
             }
 
-            Console.ReadLine();
+                Console.ReadLine();
 
         }
     }

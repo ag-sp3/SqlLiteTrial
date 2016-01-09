@@ -4,10 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9a5154e8c4b64257a27b285ed7b4188e" Name="Diagram1">
-        <EntityTypeShape EntityType="TestDBModel.Role" Width="1.5" PointX="2.875" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestDBModel.RoleGroup" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="TestDBModel.FK_Role_0_0" ManuallyRouted="false" />
+      <Diagram DiagramId="f87d8d0cbabe48529e8b3e07b6e5b94b" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="TMCMeetingsModel.EventType" Width="1.75" PointX="10.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.Meeting" Width="1.75" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.MeetingRole" Width="1.875" PointX="3.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.MeetingRoleGroup" Width="1.75" PointX="1.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.MeetingRoleTaker" Width="2" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.ObjectEventLog" Width="1.75" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.ObjectType" Width="1.75" PointX="10.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.RoleBookingType" Width="2" PointX="5.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.User" Width="1.875" PointX="3.375" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMCMeetingsModel.UserGroup" Width="1.75" PointX="1.125" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_ObjectEventLog_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_MeetingRoleTaker_3_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_MeetingRole_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_MeetingRoleTaker_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_MeetingRoleTaker_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_MeetingRoleTaker_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_ObjectEventLog_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="TMCMeetingsModel.FK_User_0_0" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,38 +1,236 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="TestDBModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\GitHub\SqlLiteTrial\SqlLiteTrial\TestDB.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Role">
+<Schema Namespace="TMCMeetingsModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\GitHub\SqlLiteTrial\SqlLiteTrial\TMCMeetings.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EventType">
+    <Key>
+      <PropertyRef Name="EventTypeID" />
+    </Key>
+    <Property Name="EventTypeID" Type="int" Nullable="false" />
+    <Property Name="EventTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Meeting">
+    <Key>
+      <PropertyRef Name="MeetingID" />
+    </Key>
+    <Property Name="MeetingID" Type="int" Nullable="false" />
+    <Property Name="Nth" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MeetingDate" Type="datetime" Nullable="false" />
+    <Property Name="Theme" Type="varchar" MaxLength="50" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="MeetingRole">
     <Key>
       <PropertyRef Name="RoleID" />
     </Key>
     <Property Name="RoleID" Type="int" Nullable="false" />
     <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RoleGroupID" Type="int" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
   </EntityType>
-  <EntityType Name="RoleGroup">
+  <EntityType Name="MeetingRoleGroup">
     <Key>
       <PropertyRef Name="RoleGroupID" />
     </Key>
     <Property Name="RoleGroupID" Type="int" Nullable="false" />
     <Property Name="RoleGroupName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK_Role_0_0">
-    <End Role="RoleGroup" Type="Self.RoleGroup" Multiplicity="0..1" />
-    <End Role="Role" Type="Self.Role" Multiplicity="*" />
+  <EntityType Name="MeetingRoleTaker">
+    <Key>
+      <PropertyRef Name="RoleTakerID" />
+    </Key>
+    <Property Name="RoleTakerID" Type="int" Nullable="false" />
+    <Property Name="MeetingID" Type="int" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="RoleBookingTypeID" Type="int" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ObjectEventLog">
+    <Key>
+      <PropertyRef Name="ObjectEventLogID" />
+    </Key>
+    <Property Name="ObjectEventLogID" Type="int" Nullable="false" />
+    <Property Name="ObjectTypeID" Type="int" Nullable="false" />
+    <Property Name="ObjectID" Type="int" Nullable="false" />
+    <Property Name="EventTypeID" Type="int" Nullable="false" />
+    <Property Name="EventDate" Type="datetime" Nullable="false" />
+    <Property Name="EventBy" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="ObjectType">
+    <Key>
+      <PropertyRef Name="ObjectTypeID" />
+    </Key>
+    <Property Name="ObjectTypeID" Type="int" Nullable="false" />
+    <Property Name="ObjectTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="RoleBookingType">
+    <Key>
+      <PropertyRef Name="RoleBookingTypeID" />
+    </Key>
+    <Property Name="RoleBookingTypeID" Type="int" Nullable="false" />
+    <Property Name="RoleBookingTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="DisplayName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserGroupID" Type="int" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="UserGroup">
+    <Key>
+      <PropertyRef Name="UserGroupID" />
+    </Key>
+    <Property Name="UserGroupID" Type="int" Nullable="false" />
+    <Property Name="UserGroupName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_MeetingRole_0_0">
+    <End Role="MeetingRoleGroup" Type="Self.MeetingRoleGroup" Multiplicity="0..1" />
+    <End Role="MeetingRole" Type="Self.MeetingRole" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="RoleGroup">
+      <Principal Role="MeetingRoleGroup">
         <PropertyRef Name="RoleGroupID" />
       </Principal>
-      <Dependent Role="Role">
+      <Dependent Role="MeetingRole">
         <PropertyRef Name="RoleGroupID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TestDBModelStoreContainer">
-    <EntitySet Name="Role" EntityType="Self.Role" store:Type="Tables" />
-    <EntitySet Name="RoleGroup" EntityType="Self.RoleGroup" store:Type="Tables" />
-    <AssociationSet Name="FK_Role_0_0" Association="Self.FK_Role_0_0">
-      <End Role="RoleGroup" EntitySet="RoleGroup" />
-      <End Role="Role" EntitySet="Role" />
+  <Association Name="FK_MeetingRoleTaker_0_0">
+    <End Role="RoleBookingType" Type="Self.RoleBookingType" Multiplicity="1" />
+    <End Role="MeetingRoleTaker" Type="Self.MeetingRoleTaker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleBookingType">
+        <PropertyRef Name="RoleBookingTypeID" />
+      </Principal>
+      <Dependent Role="MeetingRoleTaker">
+        <PropertyRef Name="RoleBookingTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingRoleTaker_1_0">
+    <End Role="MeetingRole" Type="Self.MeetingRole" Multiplicity="1" />
+    <End Role="MeetingRoleTaker" Type="Self.MeetingRoleTaker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MeetingRole">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="MeetingRoleTaker">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingRoleTaker_2_0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="MeetingRoleTaker" Type="Self.MeetingRoleTaker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MeetingRoleTaker">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MeetingRoleTaker_3_0">
+    <End Role="Meeting" Type="Self.Meeting" Multiplicity="1" />
+    <End Role="MeetingRoleTaker" Type="Self.MeetingRoleTaker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meeting">
+        <PropertyRef Name="MeetingID" />
+      </Principal>
+      <Dependent Role="MeetingRoleTaker">
+        <PropertyRef Name="MeetingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectEventLog_0_0">
+    <End Role="EventType" Type="Self.EventType" Multiplicity="1" />
+    <End Role="ObjectEventLog" Type="Self.ObjectEventLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventType">
+        <PropertyRef Name="EventTypeID" />
+      </Principal>
+      <Dependent Role="ObjectEventLog">
+        <PropertyRef Name="EventTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectEventLog_1_0">
+    <End Role="ObjectType" Type="Self.ObjectType" Multiplicity="1" />
+    <End Role="ObjectEventLog" Type="Self.ObjectEventLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectType">
+        <PropertyRef Name="ObjectTypeID" />
+      </Principal>
+      <Dependent Role="ObjectEventLog">
+        <PropertyRef Name="ObjectTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_0_0">
+    <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserGroup">
+        <PropertyRef Name="UserGroupID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TMCMeetingsModelStoreContainer">
+    <EntitySet Name="EventType" EntityType="Self.EventType" store:Type="Tables" />
+    <EntitySet Name="Meeting" EntityType="Self.Meeting" store:Type="Tables" />
+    <EntitySet Name="MeetingRole" EntityType="Self.MeetingRole" store:Type="Tables" />
+    <EntitySet Name="MeetingRoleGroup" EntityType="Self.MeetingRoleGroup" store:Type="Tables" />
+    <EntitySet Name="MeetingRoleTaker" EntityType="Self.MeetingRoleTaker" store:Type="Tables" />
+    <EntitySet Name="ObjectEventLog" EntityType="Self.ObjectEventLog" store:Type="Tables" />
+    <EntitySet Name="ObjectType" EntityType="Self.ObjectType" store:Type="Tables" />
+    <EntitySet Name="RoleBookingType" EntityType="Self.RoleBookingType" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" />
+    <EntitySet Name="UserGroup" EntityType="Self.UserGroup" store:Type="Tables" />
+    <AssociationSet Name="FK_MeetingRole_0_0" Association="Self.FK_MeetingRole_0_0">
+      <End Role="MeetingRoleGroup" EntitySet="MeetingRoleGroup" />
+      <End Role="MeetingRole" EntitySet="MeetingRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingRoleTaker_0_0" Association="Self.FK_MeetingRoleTaker_0_0">
+      <End Role="RoleBookingType" EntitySet="RoleBookingType" />
+      <End Role="MeetingRoleTaker" EntitySet="MeetingRoleTaker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingRoleTaker_1_0" Association="Self.FK_MeetingRoleTaker_1_0">
+      <End Role="MeetingRole" EntitySet="MeetingRole" />
+      <End Role="MeetingRoleTaker" EntitySet="MeetingRoleTaker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingRoleTaker_2_0" Association="Self.FK_MeetingRoleTaker_2_0">
+      <End Role="User" EntitySet="User" />
+      <End Role="MeetingRoleTaker" EntitySet="MeetingRoleTaker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MeetingRoleTaker_3_0" Association="Self.FK_MeetingRoleTaker_3_0">
+      <End Role="Meeting" EntitySet="Meeting" />
+      <End Role="MeetingRoleTaker" EntitySet="MeetingRoleTaker" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectEventLog_0_0" Association="Self.FK_ObjectEventLog_0_0">
+      <End Role="EventType" EntitySet="EventType" />
+      <End Role="ObjectEventLog" EntitySet="ObjectEventLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectEventLog_1_0" Association="Self.FK_ObjectEventLog_1_0">
+      <End Role="ObjectType" EntitySet="ObjectType" />
+      <End Role="ObjectEventLog" EntitySet="ObjectEventLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_0_0" Association="Self.FK_User_0_0">
+      <End Role="UserGroup" EntitySet="UserGroup" />
+      <End Role="User" EntitySet="User" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

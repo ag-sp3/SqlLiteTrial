@@ -12,18 +12,19 @@ namespace SqlLiteTrial
     using System;
     using System.Collections.Generic;
     
-    public partial class RoleGroup
+    public partial class RoleBookingType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RoleGroup()
+        public RoleBookingType()
         {
-            this.Roles = new HashSet<Role>();
+            this.MeetingRoleTakers = new HashSet<MeetingRoleTaker>();
         }
     
-        public int RoleGroupID { get; set; }
-        public string RoleGroupName { get; set; }
+        public int RoleBookingTypeID { get; set; }
+        public string RoleBookingTypeName { get; set; }
+        public string Remarks { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual ICollection<MeetingRoleTaker> MeetingRoleTakers { get; set; }
     }
 }

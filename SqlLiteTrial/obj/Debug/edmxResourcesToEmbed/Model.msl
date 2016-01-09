@@ -1,20 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities">
-    <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="TestDBModel.Role">
-        <MappingFragment StoreEntitySet="Role">
-          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+  <EntityContainerMapping StorageEntityContainer="TMCMeetingsModelStoreContainer" CdmEntityContainer="TMCMeetingsEntities">
+    <EntitySetMapping Name="EventTypes">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.EventType">
+        <MappingFragment StoreEntitySet="EventType">
+          <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+          <ScalarProperty Name="EventTypeName" ColumnName="EventTypeName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RoleGroups">
-      <EntityTypeMapping TypeName="TestDBModel.RoleGroup">
-        <MappingFragment StoreEntitySet="RoleGroup">
+    <EntitySetMapping Name="Meetings">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.Meeting">
+        <MappingFragment StoreEntitySet="Meeting">
+          <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+          <ScalarProperty Name="Nth" ColumnName="Nth" />
+          <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+          <ScalarProperty Name="Theme" ColumnName="Theme" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingRoles">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.MeetingRole">
+        <MappingFragment StoreEntitySet="MeetingRole">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingRoleGroups">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.MeetingRoleGroup">
+        <MappingFragment StoreEntitySet="MeetingRoleGroup">
           <ScalarProperty Name="RoleGroupID" ColumnName="RoleGroupID" />
           <ScalarProperty Name="RoleGroupName" ColumnName="RoleGroupName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MeetingRoleTakers">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.MeetingRoleTaker">
+        <MappingFragment StoreEntitySet="MeetingRoleTaker">
+          <ScalarProperty Name="RoleTakerID" ColumnName="RoleTakerID" />
+          <ScalarProperty Name="MeetingID" ColumnName="MeetingID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleBookingTypeID" ColumnName="RoleBookingTypeID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectEventLogs">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.ObjectEventLog">
+        <MappingFragment StoreEntitySet="ObjectEventLog">
+          <ScalarProperty Name="ObjectEventLogID" ColumnName="ObjectEventLogID" />
+          <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+          <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+          <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventBy" ColumnName="EventBy" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectTypes">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.ObjectType">
+        <MappingFragment StoreEntitySet="ObjectType">
+          <ScalarProperty Name="ObjectTypeID" ColumnName="ObjectTypeID" />
+          <ScalarProperty Name="ObjectTypeName" ColumnName="ObjectTypeName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleBookingTypes">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.RoleBookingType">
+        <MappingFragment StoreEntitySet="RoleBookingType">
+          <ScalarProperty Name="RoleBookingTypeID" ColumnName="RoleBookingTypeID" />
+          <ScalarProperty Name="RoleBookingTypeName" ColumnName="RoleBookingTypeName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserGroups">
+      <EntityTypeMapping TypeName="TMCMeetingsModel.UserGroup">
+        <MappingFragment StoreEntitySet="UserGroup">
+          <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />
+          <ScalarProperty Name="UserGroupName" ColumnName="UserGroupName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

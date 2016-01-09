@@ -13,10 +13,10 @@ namespace SqlLiteTrial
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestDBEntities : DbContext
+    public partial class TMCMeetingsEntities : DbContext
     {
-        public TestDBEntities()
-            : base("name=TestDBEntities")
+        public TMCMeetingsEntities()
+            : base("name=TMCMeetingsEntities")
         {
         }
     
@@ -25,7 +25,15 @@ namespace SqlLiteTrial
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<RoleGroup> RoleGroups { get; set; }
+        public virtual DbSet<EventType> EventTypes { get; set; }
+        public virtual DbSet<Meeting> Meetings { get; set; }
+        public virtual DbSet<MeetingRole> MeetingRoles { get; set; }
+        public virtual DbSet<MeetingRoleGroup> MeetingRoleGroups { get; set; }
+        public virtual DbSet<MeetingRoleTaker> MeetingRoleTakers { get; set; }
+        public virtual DbSet<ObjectEventLog> ObjectEventLogs { get; set; }
+        public virtual DbSet<ObjectType> ObjectTypes { get; set; }
+        public virtual DbSet<RoleBookingType> RoleBookingTypes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserGroup> UserGroups { get; set; }
     }
 }

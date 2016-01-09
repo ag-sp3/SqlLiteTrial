@@ -12,12 +12,18 @@ namespace SqlLiteTrial
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class MeetingRoleTaker
     {
+        public int RoleTakerID { get; set; }
+        public int MeetingID { get; set; }
+        public int UserID { get; set; }
         public int RoleID { get; set; }
-        public string RoleName { get; set; }
-        public Nullable<int> RoleGroupID { get; set; }
+        public int RoleBookingTypeID { get; set; }
+        public string Remarks { get; set; }
     
-        public virtual RoleGroup RoleGroup { get; set; }
+        public virtual Meeting Meeting { get; set; }
+        public virtual MeetingRole MeetingRole { get; set; }
+        public virtual RoleBookingType RoleBookingType { get; set; }
+        public virtual User User { get; set; }
     }
 }
